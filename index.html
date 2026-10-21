@@ -2,180 +2,364 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAMÓN AUTO SALES | Inventario</title>
-  <meta name="description" content="Encontrá tu próximo vehículo en Ramón Auto Sales, Hollywood, Florida.">
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f9; color: #182435; }
-    header { background: #101c2d; color: white; padding: 24px 18px; }
-    .wrap { max-width: 1100px; margin: auto; }
-    header h1 { margin: 0 0 8px; font-size: 28px; }
-    header p { margin: 0; color: #d4dfec; }
-    nav { background: #1c304a; padding: 12px 18px; }
-    nav a { color: white; text-decoration: none; margin-right: 20px; }
-    .hero { background: #203a59; color: white; padding: 35px 20px; }
-    .hero h2 { font-size: 32px; margin: 0 0 12px; }
-    .btn { display: inline-block; background: #15945b; color: white; border: 0; border-radius: 7px; padding: 12px 18px; text-decoration: none; cursor: pointer; font-weight: bold; }
-    main { max-width: 1100px; margin: 25px auto; padding: 0 16px; }
-    .filters { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0; }
-    input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccd3dd; border-radius: 7px; font: inherit; background: white; }
-    .filters input, .filters select { flex: 1; min-width: 160px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(245px,1fr)); gap: 18px; }
-    .car { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 14px #15263a12; }
-    .car img { width: 100%; height: 190px; object-fit: cover; background: #e3e8ef; }
-    .car-body { padding: 16px; }
-    .car h3 { margin: 0 0 9px; }
-    .muted { color: #637084; font-size: 14px; }
-    .price { font-size: 21px; font-weight: bold; margin: 12px 0; }
-    section { margin-bottom: 40px; }
-    .panel { background: white; padding: 22px; border-radius: 12px; }
-    .formgrid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 12px; margin: 12px 0; }
-    label { display: block; font-size: 14px; font-weight: bold; }
-    label input, label select, label textarea { margin-top: 7px; }
-    footer { background: #101c2d; color: white; padding: 25px 18px; margin-top: 40px; }
-    .notice { font-size: 13px; color: #637084; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAMÓN AUTO SALES | Inventario de vehículos</title>
+<meta name="description" content="Descubrí tu próximo vehículo en Ramón Auto Sales, Hollywood, Florida. Consultá nuestro inventario y contactanos.">
+<style>
+:root {
+  --navy:#07182b;
+  --navy2:#102b49;
+  --gold:#eab54e;
+  --green:#12a65a;
+  --white:#fff;
+  --light:#f3f6fa;
+  --text:#16243a;
+  --muted:#6b7789;
+}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--light);color:var(--text)}
+a {color:inherit}
+button,input,select,textarea {font:inherit}
+.wrap {width:min(1200px,92%);margin:auto}
+header {background:var(--navy);color:white;border-bottom:1px solid #24364a}
+.topbar {min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.logo {text-decoration:none;font-weight:900;font-size:25px;line-height:1.05;letter-spacing:1px}
+.logo span {display:block;color:var(--gold);font-size:13px;letter-spacing:4px;margin-top:5px}
+nav {display:flex;align-items:center;gap:23px}
+nav a {text-decoration:none;font-size:12px;font-weight:bold;color:#edf2f8}
+nav a:hover {color:var(--gold)}
+.phone {font-weight:bold;white-space:nowrap}
+.btn {display:inline-block;border:0;border-radius:5px;padding:13px 18px;text-align:center;text-decoration:none;font-weight:bold;cursor:pointer}
+.btn-gold {background:var(--gold);color:var(--navy)}
+.btn-green {background:var(--green);color:white}
+.btn-dark {background:var(--navy);color:white}
+.hero {color:white;background:linear-gradient(90deg,rgba(4,18,34,.95),rgba(4,18,34,.55)),url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2000&q=85') center/cover;min-height:440px;display:flex;align-items:center}
+.hero-content {max-width:660px;padding:65px 0}
+.eyebrow {color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:3px;text-transform:uppercase}
+.hero h1 {font-size:clamp(38px,6vw,66px);line-height:1.02;margin:15px 0}
+.hero h1 span {color:var(--gold)}
+.hero p {font-size:18px;line-height:1.6;color:#e4eaf1;max-width:550px}
+.actions {display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.trust {background:var(--navy2);color:white}
+.trust-grid {display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:23px 0}
+.trust-item {display:flex;gap:12px;align-items:center;font-size:13px;line-height:1.45}
+.trust-icon {font-size:24px;color:var(--gold)}
+section {scroll-margin-top:20px}
+.search-area {background:white;padding:24px;border-radius:12px;box-shadow:0 7px 28px #0b20330c;margin-top:30px}
+.section-head {display:flex;justify-content:space-between;align-items:end;gap:15px;margin:38px 0 20px}
+.section-head h2 {font-size:clamp(25px,4vw,34px);margin:7px 0}
+.section-head p {color:var(--muted);margin:0;line-height:1.5}
+.filters {display:grid;grid-template-columns:repeat(4,1fr) auto;gap:12px;margin-top:17px}
+input,select,textarea {width:100%;padding:12px;border:1px solid #d7dee8;border-radius:6px;background:white;color:var(--text)}
+label {display:block;font-size:12px;font-weight:bold}
+label input,label select,label textarea {margin-top:7px}
+.inventory-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:19px}
+.car-card {background:white;border-radius:10px;overflow:hidden;border:1px solid #e3e8ef;box-shadow:0 5px 18px #0b20330b;transition:transform .2s}
+.car-card:hover {transform:translateY(-4px)}
+.car-photo {height:185px;position:relative;background:#dce3ec}
+.car-photo img {width:100%;height:100%;object-fit:cover;display:block}
+.year-tag {position:absolute;top:12px;left:12px;background:var(--navy);color:white;padding:6px 9px;border-radius:4px;font-size:12px;font-weight:bold}
+.car-info {padding:16px}
+.car-info h3 {font-size:17px;margin:0 0 12px}
+.specs {display:flex;flex-wrap:wrap;gap:9px;color:var(--muted);font-size:12px;line-height:1.5}
+.price {font-size:21px;font-weight:900;margin:15px 0;color:var(--navy)}
+.price-note {font-size:11px;color:var(--muted);margin-top:-9px;margin-bottom:14px}
+.car-info .btn {width:100%;font-size:12px}
+.empty {background:white;padding:28px;border-radius:9px;color:var(--muted);grid-column:1/-1}
+.about {display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center;margin:65px auto}
+.about-image {min-height:310px;border-radius:12px;background:linear-gradient(0deg,#07182b44,#07182b10),url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1100&q=85') center/cover}
+.about h2 {font-size:32px;margin:10px 0}
+.about p {line-height:1.8;color:var(--muted)}
+.benefits {display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:20px}
+.benefit {font-size:14px;font-weight:bold}
+.contact-section {background:linear-gradient(90deg,#07182bf0,#07182b9c),url('https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1800&q=85') center/cover;padding:55px 0;color:white}
+.contact-grid {display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.contact-copy h2 {font-size:36px;margin:10px 0}
+.contact-copy p {line-height:1.7;color:#e0e7f0}
+.contact-form {background:white;color:var(--text);border-radius:12px;padding:24px}
+.contact-form h3 {margin-top:0}
+.form-grid {display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.full {grid-column:1/-1}
+.contact-form .btn {width:100%;margin-top:15px}
+.small {font-size:11px;line-height:1.6;color:var(--muted)}
+footer {background:#04101f;color:white;padding:35px 0 20px}
+.footer-grid {display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:25px}
+footer p,footer a {font-size:13px;line-height:1.8;color:#c5cfdd}
+footer a {text-decoration:none}
+.footer-bottom {border-top:1px solid #253347;margin-top:25px;padding-top:17px;font-size:11px;color:#aab5c5;line-height:1.7}
+@media(max-width:950px) {
+ nav {gap:12px}
+ .phone {display:none}
+ .inventory-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+ .filters {grid-template-columns:repeat(2,1fr)}
+ .trust-grid {grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px) {
+ .topbar {padding:17px 0;align-items:flex-start}
+ .logo {font-size:21px}
+ nav {display:none}
+ .hero {min-height:390px}
+ .hero-content {padding:50px 0}
+ .hero p {font-size:16px}
+ .inventory-grid {grid-template-columns:1fr}
+ .car-photo {height:220px}
+ .filters {grid-template-columns:1fr}
+ .trust-grid {gap:18px}
+ .trust-item {font-size:12px}
+ .about,.contact-grid,.footer-grid {grid-template-columns:1fr}
+ .about-image {min-height:230px}
+ .contact-copy h2 {font-size:30px}
+ .form-grid {grid-template-columns:1fr}
+ .full {grid-column:auto}
+ .section-head {align-items:flex-start;flex-direction:column}
+}
+</style>
 </head>
 <body>
 <header>
-  <div class="wrap">
-    <h1>RAMÓN AUTO SALES</h1>
-    <p>Tu próximo auto te está esperando.</p>
-    <p style="margin-top:10px">📞 786-382-3759</p>
-    <p>📍 5800 Funston St, Hollywood, FL 33023</p>
+  <div class="wrap topbar">
+    <a class="logo" href="#inicio">RAMÓN<span>AUTO SALES</span></a>
+    <nav>
+      <a href="#inicio">INICIO</a>
+      <a href="#inventario">INVENTARIO</a>
+      <a href="#nosotros">NOSOTROS</a>
+      <a href="#contacto">CONTACTO</a>
+    </nav>
+    <a class="phone" href="tel:+17863823759">☎ 786-382-3759</a>
+    <a class="btn btn-green" href="https://wa.me/17863823759" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </header>
-<nav>
+
+<section class="hero" id="inicio">
   <div class="wrap">
-    <a href="#inventario">Inventario</a>
-    <a href="#contacto">Consultar</a>
-    <a href="#ubicacion">Ubicación</a>
+    <div class="hero-content">
+      <div class="eyebrow">Bienvenido a</div>
+      <h1>RAMÓN<br><span>AUTO SALES</span></h1>
+      <p>Tu próximo auto te está esperando. Explorá nuestro inventario y encontrá el vehículo ideal para vos.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#inventario">EXPLORAR INVENTARIO →</a>
+        <a class="btn btn-green" href="https://wa.me/17863823759" target="_blank" rel="noopener">CONSULTAR POR WHATSAPP</a>
+      </div>
+    </div>
   </div>
-</nav>
-<div class="hero">
-  <div class="wrap">
-    <h2>Encontrá el auto ideal para vos</h2>
-    <p>Explorá nuestros vehículos y consultanos por el que te interese.</p>
-    <a class="btn" href="#inventario">VER INVENTARIO</a>
+</section>
+
+<div class="trust">
+  <div class="wrap trust-grid">
+    <div class="trust-item"><span class="trust-icon">✓</span><span><b>Atención personalizada</b><br>Te ayudamos a encontrar tu auto</span></div>
+    <div class="trust-item"><span class="trust-icon">◇</span><span><b>Financiamiento disponible</b><br>Sujeto a aprobación</span></div>
+    <div class="trust-item"><span class="trust-icon">◎</span><span><b>Distintos vehículos</b><br>Explorá las opciones disponibles</span></div>
+    <div class="trust-item"><span class="trust-icon">⌖</span><span><b>Estamos en Hollywood</b><br>Florida, Estados Unidos</span></div>
   </div>
 </div>
-<main>
+
+<main class="wrap">
   <section id="inventario">
-    <h2>Nuestro inventario</h2>
-    <p class="muted">Los vehículos de abajo son ejemplos. Reemplazalos por tu inventario real.</p>
-    <div class="filters">
-      <input id="buscar" placeholder="Buscar marca o modelo..." oninput="mostrarAutos()">
-      <select id="filtroAnio" onchange="mostrarAutos()">
-        <option value="">Todos los años</option>
-      </select>
-    </div>
-    <div class="grid" id="autos"></div>
-  </section>
-
-  <section id="contacto">
-    <div class="panel">
-      <h2>¿Te interesa un vehículo?</h2>
-      <p>Completá el formulario para que podamos comunicarnos con vos.</p>
-      <form id="formulario">
-        <div class="formgrid">
-          <label>Nombre y apellido *
-            <input name="nombre" required>
-          </label>
-          <label>Teléfono *
-            <input name="telefono" type="tel" required>
-          </label>
-          <label>Correo electrónico
-            <input name="email" type="email">
-          </label>
-          <label>Vehículo que te interesa *
-            <select name="vehiculo" id="vehiculo" required>
-              <option value="">Elegí un vehículo</option>
-            </select>
-          </label>
-          <label>Forma de pago
-            <select name="pago">
-              <option value="">Seleccionar</option>
-              <option>Cash / efectivo</option>
-              <option>Financiamiento</option>
-              <option>Tengo un vehículo para entregar</option>
-            </select>
-          </label>
-        </div>
-        <label>Mensaje
-          <textarea name="mensaje" rows="3" placeholder="Contanos qué estás buscando"></textarea>
+    <div class="search-area">
+      <h2 style="margin:0">Buscá tu próximo auto</h2>
+      <p style="color:var(--muted);margin-bottom:0">Filtrá el inventario para encontrar el vehículo que buscás.</p>
+      <div class="filters">
+        <label>Marca
+          <select id="filtroMarca" onchange="renderAutos()"><option value="">Todas las marcas</option></select>
         </label>
-        <p class="notice">Al enviar, autorizás que Ramón Auto Sales se comunique con vos sobre tu consulta.</p>
-        <button class="btn" type="submit">CONSULTAR POR WHATSAPP</button>
-      </form>
+        <label>Modelo
+          <input id="filtroModelo" placeholder="Ej. RAV4, Accord..." oninput="renderAutos()">
+        </label>
+        <label>Año
+          <select id="filtroAnio" onchange="renderAutos()"><option value="">Todos los años</option></select>
+        </label>
+        <label>Color
+          <input id="filtroColor" placeholder="Ej. Negro, gris..." oninput="renderAutos()">
+        </label>
+        <button class="btn btn-dark" onclick="limpiarFiltros()">Limpiar</button>
+      </div>
     </div>
+
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Nuestro inventario</div>
+        <h2>Encontrá tu próximo vehículo</h2>
+        <p id="contador">Vehículos publicados en nuestro inventario</p>
+      </div>
+    </div>
+    <div class="inventory-grid" id="autos"></div>
   </section>
 
-  <section id="ubicacion">
-    <div class="panel">
-      <h2>Visitá RAMÓN AUTO SALES</h2>
-      <p>📍 5800 Funston St, Hollywood, FL 33023, USA</p>
-      <p>📞 786-382-3759</p>
-      <a class="btn" href="https://wa.me/17863823759" target="_blank" rel="noopener">ESCRIBINOS POR WHATSAPP</a>
+  <section class="about" id="nosotros">
+    <div class="about-image" role="img" aria-label="Vehículo en un entorno de Florida"></div>
+    <div>
+      <div class="eyebrow">Conocé nuestro negocio</div>
+      <h2>Tu próximo auto comienza acá</h2>
+      <p>En RAMÓN AUTO SALES te ayudamos a explorar distintas opciones de vehículos y a consultar sobre el que mejor se adapte a tus necesidades. Contactanos para confirmar disponibilidad, precio y condiciones.</p>
+      <div class="benefits">
+        <div class="benefit">✓ Atención personalizada</div>
+        <div class="benefit">✓ Opciones de financiación</div>
+        <div class="benefit">✓ Consultas por WhatsApp</div>
+        <div class="benefit">✓ Inventario actualizado</div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-dark" href="#contacto">CONTACTANOS</a>
+      </div>
     </div>
   </section>
 </main>
+
+<section class="contact-section" id="contacto">
+  <div class="wrap contact-grid">
+    <div class="contact-copy">
+      <div class="eyebrow">Hablemos</div>
+      <h2>¿Te interesa algún vehículo?</h2>
+      <p>Completá tus datos y contanos cuál auto te interesa. Se abrirá WhatsApp con tu consulta lista para enviar.</p>
+      <p>☎ <a href="tel:+17863823759">786-382-3759</a><br>⌖ 5800 Funston St, Hollywood, FL 33023, USA</p>
+    </div>
+    <form class="contact-form" id="formulario">
+      <h3>Solicitá información</h3>
+      <div class="form-grid">
+        <label>Nombre y apellido *
+          <input name="nombre" required autocomplete="name">
+        </label>
+        <label>Teléfono *
+          <input name="telefono" type="tel" required autocomplete="tel">
+        </label>
+        <label>Correo electrónico
+          <input name="email" type="email" autocomplete="email">
+        </label>
+        <label>Vehículo de interés *
+          <select name="vehiculo" id="vehiculo" required>
+            <option value="">Seleccioná un vehículo</option>
+          </select>
+        </label>
+        <label class="full">¿Cómo querés pagar?
+          <select name="pago">
+            <option value="">Seleccionar opción</option>
+            <option>Cash / efectivo</option>
+            <option>Financiamiento</option>
+            <option>Tengo un vehículo para entregar</option>
+          </select>
+        </label>
+        <label class="full">Mensaje
+          <textarea name="mensaje" rows="3" placeholder="¿Qué te gustaría saber?"></textarea>
+        </label>
+      </div>
+      <p class="small">Usaremos estos datos para responder tu consulta sobre vehículos. No ingreses números de Seguro Social ni datos bancarios.</p>
+      <button type="submit" class="btn btn-green">ENVIAR CONSULTA POR WHATSAPP →</button>
+    </form>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
-    <strong>RAMÓN AUTO SALES</strong>
-    <p>Hollywood, Florida · 786-382-3759</p>
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="#inicio">RAMÓN<span>AUTO SALES</span></a>
+        <p>Encontrá tu próximo vehículo con atención personalizada.</p>
+      </div>
+      <div>
+        <b>Contacto</b>
+        <p><a href="tel:+17863823759">786-382-3759</a><br>5800 Funston St<br>Hollywood, FL 33023, USA</p>
+      </div>
+      <div>
+        <b>Explorá</b>
+        <p><a href="#inventario">Nuestro inventario</a><br><a href="#nosotros">Sobre nosotros</a><br><a href="#contacto">Solicitar información</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © <span id="year"></span> RAMÓN AUTO SALES. Todos los derechos reservados.<br>
+      Prices shown reflect the amount to be financed after a 35%–45% down payment. Subject to approval. Not cash price.
+    </div>
   </div>
 </footer>
-<script>
-  // Reemplazá estos ejemplos con tus vehículos reales.
-  // Después agregaremos una forma sencilla de administrar más de 100 autos.
-  const autos = [
-    {id:"rav4-2022",marca:"Toyota",modelo:"RAV4 LE",anio:2022,millas:78000,color:"Gris",precio:"Consultar",foto:"",descripcion:"Consultá disponibilidad."},
-    {id:"accord-2022",marca:"Honda",modelo:"Accord Sport Special Edition",anio:2022,millas:80000,color:"Plateado",precio:"Consultar",foto:"",descripcion:"Consultá disponibilidad."}
-  ];
 
-  function mostrarAutos() {
-    const q = document.getElementById("buscar").value.toLowerCase();
-    const anio = document.getElementById("filtroAnio").value;
-    const filtrados = autos.filter(a =>
-      (a.marca+" "+a.modelo).toLowerCase().includes(q) &&
-      (!anio || String(a.anio) === anio)
-    );
-    document.getElementById("autos").innerHTML = filtrados.map(a => `
-      <article class="car">
-        ${a.foto ? `<img src="${a.foto}" alt="${a.marca} ${a.modelo}">` : `<div style="height:190px;display:grid;place-items:center;background:#e3e8ef;color:#637084">Foto del vehículo</div>`}
-        <div class="car-body">
-          <h3>${a.marca} ${a.modelo}</h3>
-          <div class="muted">${a.anio} · ${Number(a.millas).toLocaleString()} millas · ${a.color}</div>
-          <div class="price">${a.precio}</div>
-          <p>${a.descripcion}</p>
-          <button class="btn" onclick="elegirAuto('${a.id}')">ME INTERESA</button>
+<script>
+// EDITÁ ESTA LISTA PARA AGREGAR O MODIFICAR VEHÍCULOS.
+// Las fotos y los precios de ejemplo deben reemplazarse por datos reales.
+const autos = [
+  {id:"rav4-2022",marca:"Toyota",modelo:"RAV4 LE",anio:2022,millas:78000,color:"Gris",precio:"Consultar",foto:"https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=80"},
+  {id:"crv-2020",marca:"Honda",modelo:"CR-V Touring",anio:2020,millas:70000,color:"Azul",precio:"Consultar",foto:"https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80"},
+  {id:"accord-2022",marca:"Honda",modelo:"Accord Sport Special Edition",anio:2022,millas:80000,color:"Plateado",precio:"Consultar",foto:"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80"},
+  {id:"camry-2022",marca:"Toyota",modelo:"Camry SE",anio:2022,millas:79000,color:"Gris oscuro",precio:"Consultar",foto:"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80"}
+];
+
+function renderAutos() {
+  const marca = document.getElementById("filtroMarca").value;
+  const modelo = document.getElementById("filtroModelo").value.toLowerCase();
+  const anio = document.getElementById("filtroAnio").value;
+  const color = document.getElementById("filtroColor").value.toLowerCase();
+  const lista = autos.filter(a =>
+    (!marca || a.marca === marca) &&
+    (!modelo || (a.marca+" "+a.modelo).toLowerCase().includes(modelo)) &&
+    (!anio || String(a.anio) === anio) &&
+    (!color || a.color.toLowerCase().includes(color))
+  );
+
+  document.getElementById("contador").textContent =
+    `${lista.length} vehículo(s) en esta búsqueda`;
+
+  document.getElementById("autos").innerHTML = lista.map(a => `
+    <article class="car-card">
+      <div class="car-photo">
+        <img src="${a.foto}" alt="${a.anio} ${a.marca} ${a.modelo}" loading="lazy">
+        <span class="year-tag">${a.anio}</span>
+      </div>
+      <div class="car-info">
+        <h3>${a.marca} ${a.modelo}</h3>
+        <div class="specs">
+          <span>◷ ${Number(a.millas).toLocaleString("en-US")} millas</span>
+          <span>● ${a.color}</span>
         </div>
-      </article>`).join("") || "<p>No encontramos vehículos con esa búsqueda.</p>";
-    const select = document.getElementById("vehiculo");
-    const actual = select.value;
-    select.innerHTML = '<option value="">Elegí un vehículo</option>' +
-      autos.map(a => `<option value="${a.marca} ${a.modelo} ${a.anio}">${a.marca} ${a.modelo} ${a.anio}</option>`).join("");
-    if ([...select.options].some(o => o.value === actual)) select.value = actual;
-    const anios = [...new Set(autos.map(a=>a.anio))].sort((a,b)=>b-a);
-    const filtro = document.getElementById("filtroAnio");
-    const valor = filtro.value;
-    filtro.innerHTML = '<option value="">Todos los años</option>' + anios.map(y=>`<option>${y}</option>`).join("");
-    filtro.value = valor;
-  }
-  function elegirAuto(id) {
-    const a = autos.find(x => x.id === id);
-    document.getElementById("vehiculo").value = `${a.marca} ${a.modelo} ${a.anio}`;
-    document.getElementById("contacto").scrollIntoView({behavior:"smooth"});
-  }
-  document.getElementById("formulario").addEventListener("submit", e => {
-    e.preventDefault();
-    const d = new FormData(e.target);
-    const mensaje = `Hola Ramón Auto Sales, me interesa un vehículo.\nNombre: ${d.get("nombre")}\nTeléfono: ${d.get("telefono")}\nEmail: ${d.get("email") || "No indicado"}\nVehículo: ${d.get("vehiculo")}\nForma de pago: ${d.get("pago") || "No indicada"}\nMensaje: ${d.get("mensaje") || "Sin mensaje"}`;
-    window.open("https://wa.me/17863823759?text="+encodeURIComponent(mensaje),"_blank");
-  });
-  mostrarAutos();
+        <div class="price">${a.precio}</div>
+        <div class="price-note">Consultá precio y disponibilidad</div>
+        <button class="btn btn-dark" style="width:100%" onclick="seleccionarAuto('${a.id}')">CONSULTAR VEHÍCULO →</button>
+      </div>
+    </article>
+  `).join("") || '<div class="empty">No encontramos vehículos con esos filtros. Probá otra búsqueda.</div>';
+
+  const select = document.getElementById("vehiculo");
+  const actual = select.value;
+  select.innerHTML = '<option value="">Seleccioná un vehículo</option>' +
+    autos.map(a => `<option value="${a.marca} ${a.modelo} ${a.anio}">${a.anio} ${a.marca} ${a.modelo}</option>`).join("");
+  if ([...select.options].some(o => o.value === actual)) select.value = actual;
+}
+
+function seleccionarAuto(id) {
+  const a = autos.find(v => v.id === id);
+  if (a) document.getElementById("vehiculo").value = `${a.marca} ${a.modelo} ${a.anio}`;
+  document.getElementById("contacto").scrollIntoView({behavior:"smooth"});
+}
+
+function limpiarFiltros() {
+  document.getElementById("filtroMarca").value = "";
+  document.getElementById("filtroModelo").value = "";
+  document.getElementById("filtroAnio").value = "";
+  document.getElementById("filtroColor").value = "";
+  renderAutos();
+}
+
+document.getElementById("formulario").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const d = new FormData(e.currentTarget);
+  const mensaje = [
+    "Hola Ramón Auto Sales, quiero información sobre un vehículo.",
+    "Nombre: " + d.get("nombre"),
+    "Teléfono: " + d.get("telefono"),
+    "Correo: " + (d.get("email") || "No indicado"),
+    "Vehículo: " + d.get("vehiculo"),
+    "Forma de pago: " + (d.get("pago") || "No indicada"),
+    "Mensaje: " + (d.get("mensaje") || "Sin mensaje")
+  ].join("\n");
+  window.open("https://wa.me/17863823759?text=" + encodeURIComponent(mensaje), "_blank", "noopener");
+});
+
+const marcas = [...new Set(autos.map(a=>a.marca))].sort();
+document.getElementById("filtroMarca").innerHTML =
+  '<option value="">Todas las marcas</option>' + marcas.map(m=>`<option>${m}</option>`).join("");
+const anios = [...new Set(autos.map(a=>a.anio))].sort((a,b)=>b-a);
+document.getElementById("filtroAnio").innerHTML =
+  '<option value="">Todos los años</option>' + anios.map(a=>`<option>${a}</option>`).join("");
+document.getElementById("year").textContent = new Date().getFullYear();
+renderAutos();
 </script>
 </body>
 </html>
