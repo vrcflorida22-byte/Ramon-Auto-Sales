@@ -6,7 +6,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAMÓN AUTO SALES | Inventario de vehículos</title>
 <meta name="description" content="Descubrí tu próximo vehículo en Ramón Auto Sales, Hollywood, Florida. Consultá nuestro inventario y contactanos.">
-<style>
+<styl/* PORTADA RAMON AUTO SALES */
+.portada-ramon {
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  color: white;
+  background:
+    linear-gradient(rgba(3,16,36,.4), rgba(3,16,36,.75)),
+    url("portada-ramon.png") center center / cover no-repeat;
+}
+
+.contenido-portada {
+  max-width: 850px;
+}
+
+.portada-ramon h1 {
+  font-size: clamp(36px, 6vw, 68px);
+  margin-bottom: 18px;
+  font-weight: 900;
+}
+
+.portada-ramon p {
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.boton-inventario {
+  display: inline-block;
+  padding: 15px 28px;
+  background: #e8ad38;
+  color: #08172b;
+  text-decoration: none;
+  font-weight: 800;
+  border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+  .portada-ramon {
+    min-height: 400px;
+  }
+}e>
 :root {
   --navy:#07182b;
   --navy2:#102b49;
@@ -118,6 +161,20 @@ footer a {text-decoration:none}
 </style>
 </head>
 <body>
+  
+<section class="portada-ramon">
+  <div class="contenido-portada">
+    <h1>RAMÓN AUTO SALES</h1>
+    <p>
+      Tu próximo auto te está esperando.
+      Calidad, confianza y opciones de financiamiento.
+    </p>
+    <a href="#inventario" class="boton-inventario">
+      VER INVENTARIO
+    </a>
+  </div>
+</section>
+
 <header>
   <div class="wrap topbar">
     <a class="logo" href="#inicio">RAMÓN<span>AUTO SALES</span></a>
